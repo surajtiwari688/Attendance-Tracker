@@ -1,5 +1,7 @@
 import sqlite3
+import pandas as pd
 from datetime import datetime
+
 
 def create_database():
     conn = sqlite3.connect("attendance.db") # Creates attendance.db file
@@ -40,6 +42,14 @@ def fetch_history():
     conn.close()
     return records
 
+
+# Export Attendance Data to Excel
+def export_to_excel():
+    conn = sqlite3.connect("attendance.db")
+    df = pd.read_sql_query("SELECT * FROM attendance", conn)
+    conn.close()
+    df.to_excel("Attendance_Report.xlsx", index=False)
+    print("✅ Attendance report saved as 'Attendance_Report.xlsx'")
 
 # Create Database Table (Run this once)
 

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from database import insert_attendance, fetch_history
+from database import insert_attendance, fetch_history, export_to_excel
 
 
 #Function to Calculate Attendance
@@ -55,7 +55,9 @@ def view_history():
 
     messagebox.showinfo("Attendance History", history_text)
 
-
+def export_data():
+    export_to_excel()
+    messagebox.showinfo("Export Successful", "Attendance exported to 'Attendance_Report.xlsx'")
 
 # Creating GUI
 root = tk.Tk()
@@ -82,6 +84,9 @@ office_visits_entry.pack()
 # Buttons
 tk.Button(root, text="Calculate Attendance", command=calculate_attendance).pack()
 tk.Button(root, text="View Attendance History", command=view_history).pack()
+# Add "Export to Excel" Button
+tk.Button(root, text="Export to Excel", command=export_data).pack(pady=10)
+
 
 # Run the GUI Loop
 root.mainloop()
